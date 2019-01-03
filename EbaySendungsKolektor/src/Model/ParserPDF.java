@@ -11,8 +11,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
@@ -37,10 +39,30 @@ public class ParserPDF {
 		System.out.println(uri);
 		String line = "";
 		
-		PDDocument doc = PDDocument.load(new File(uri));
-        PDFTextStripper pdfStripper = new PDFTextStripper();
-        String pdDocText = pdfStripper.getText(doc);
-        System.out.println(pdDocText + "inhaltende");
+		
+//		 PDFTextStripper ocrStripper = new PDFOCRTextStripper();
+//	        //PDFTextStripper ocrStripper = new PDFTextStripper();
+//	        PDDocument document = PDDocument.load("Assets/send1.pdf");
+//	        String data = ocrStripper.getText(document);
+//	        document.close();
+//	        System.out.println("data "+data);
+//		
+		
+		
+//		PDDocument doc = PDDocument.load(new File(uri));
+//        PDFTextStripper pdfStripper = new PDFTextStripper();
+//        String pdDocText = pdfStripper.getText(doc);
+//		String parsedText;
+//		File f = new File(uri);
+//		PDFParser parser = new PDFParser(new RandomAccessFile(f, "r"));
+//		parser.parse();
+//		
+//		COSDocument cosDoc = parser.getDocument();
+//		PDFTextStripper pdfStripper = new PDFTextStripper();
+//		PDDocument pdDoc = new PDDocument(cosDoc);
+//		parsedText = pdfStripper.getText(pdDoc);
+//		System.out.println(parsedText);
+		//System.out.println(pdDocText + "inhaltende");
         return null;
 	}
 	
@@ -59,7 +81,9 @@ public class ParserPDF {
             } else if (xObject instanceof PDFormXObject) {
             	 PDFormXObject image = (PDFormXObject)xObject;
                 images.addAll(getImagesFromResources(((PDFormXObject) xObject).getResources()));
+                
             }
+            
         }
         return images;
     }
@@ -71,6 +95,13 @@ public class ParserPDF {
 		PDDocument document = PDDocument.load(resource);
 
         PDPage page = document.getPage(0);
+        System.out.println(page.getContents());
+        InputStream inputStream = page.getContents();
+        
+        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+        
+        System.out.println(result);
         PDResources pageResources = page.getResources();
 		List<RenderedImage> limage = getImagesFromResources(pageResources);
 		for(RenderedImage imageO : limage) {

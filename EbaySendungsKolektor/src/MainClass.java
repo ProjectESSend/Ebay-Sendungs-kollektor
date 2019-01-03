@@ -13,13 +13,14 @@ public class MainClass {
 
 	public static void main(String[] args) throws Exception {
 		//Pfad eingeben:
-		Path p = Paths.get("Assets/send1.pdf");
+		Path p = Paths.get("Assets/send2.pdf");
 		
 		// PDF PARSER LADEN:
 		ParserPDF parser = new ParserPDF();
 		
 		//Methode read aufrufen:
 		parser.readEtiketInformationFromPdf((p.toUri()));
+		//parser.writeImages(p.toUri());
 
 //		PDDocument pd = new PDDocument();
 //	    PDPage page = new PDPage();
