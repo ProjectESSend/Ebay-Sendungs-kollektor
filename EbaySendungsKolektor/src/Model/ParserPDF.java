@@ -40,13 +40,13 @@ public class ParserPDF {
 		String line = "";
 		
 		
-//		 PDFTextStripper ocrStripper = new PDFOCRTextStripper();
-//	        //PDFTextStripper ocrStripper = new PDFTextStripper();
-//	        PDDocument document = PDDocument.load("Assets/send1.pdf");
-//	        String data = ocrStripper.getText(document);
-//	        document.close();
-//	        System.out.println("data "+data);
-//		
+		 PDFTextStripper ocrStripper = new PDFOCRTextStripper();
+	        //PDFTextStripper ocrStripper = new PDFTextStripper();
+	        PDDocument document = PDDocument.load("Assets/send1.pdf");
+	        String data = ocrStripper.getText(document);
+	        document.close();
+	        System.out.println("data "+data);
+		
 		
 		
 //		PDDocument doc = PDDocument.load(new File(uri));
